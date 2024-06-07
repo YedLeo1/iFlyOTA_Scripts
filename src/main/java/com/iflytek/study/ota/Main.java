@@ -19,7 +19,7 @@ public class Main {
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
             data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-                    + Character.digit(s.charAt(i+1), 16));
+                    + Character.digit(s.charAt(i + 1), 16));
         }
         return data;
     }
@@ -52,18 +52,18 @@ public class Main {
         byte[] bytesToDecrypt, decryptedBytes, decompressedBytes, compressedBytes, encryptedBytes;
         String[] temp;
 
-        while(true) {
+        while (true) {
             System.out.print("> ");
             command = scanner.nextLine();
             temp = command.split(" ");
-            if(temp != null) {
-                switch(temp[0].toLowerCase()) {
+            if (temp != null) {
+                switch (temp[0].toLowerCase()) {
                     case "deskey": {
-                        System.out.println("DES key is: "+DESUtils.getKey());
+                        System.out.println("DES key is: " + DESUtils.getKey());
                         break;
                     }
                     case "desdecrypt": {
-                        if(!(temp.length <= 1)) {
+                        if (!(temp.length <= 1)) {
                             bytesToDecrypt = hexStringToByteArray(temp[1]);
                             decryptedBytes = DESUtils.decrypt(bytesToDecrypt);
                             decompressedBytes = GzipUtils.decompress(decryptedBytes);
@@ -75,11 +75,11 @@ public class Main {
                         break;
                     }
                     case "aeskey": {
-                        System.out.println("AES key is: "+AESUtils.getKey());
+                        System.out.println("AES key is: " + AESUtils.getKey());
                         break;
                     }
                     case "aesdecrypt": {
-                        if(!(temp.length <= 1)) {
+                        if (!(temp.length <= 1)) {
                             bytesToDecrypt = Base64Utils.decode(temp[1]);
                             decryptedBytes = AESUtils.decrypt(bytesToDecrypt);
                             decompressedBytes = GzipUtils.decompress(decryptedBytes);
@@ -113,7 +113,7 @@ public class Main {
                     case "set": {//选择机型，版本
                         System.out.println("1.设置机型\n2.设置版本号");
                         int qqq = scanner.nextInt();
-                        if(qqq == 1) {
+                        if (qqq == 1) {
                             System.out.println("输入机型编码：\n3.T20 Pro\n5.T10\n6.X1pro\n8.X2pro");
                             int inputIndex = scanner.nextInt();
                             scanner.nextLine(); // Consume newline left-over
@@ -121,11 +121,10 @@ public class Main {
                             AiStudyDevice[] aiStudyDevices = AiStudyDevice.values();
 
                             aiStudyDevice = aiStudyDevices[inputIndex];
-                        } else if (qqq==2) {
-                            System.out.println("请输入版本号(格式：iFLY_V2.00.5):");
-                            Scanner input=new Scanner(System.in);
-
-                            queryRecord = new QueryRecord(aiStudyDevice, input.nextLine());
+                        } else if (qqq == 2) {
+                            System.out.println("请输入版本号(格式：2.00.5):");
+                            Scanner input = new Scanner(System.in);
+                            queryRecord = new QueryRecord(aiStudyDevice, "iFLY_V" + input.nextLine());
                             System.out.println(queryRecord);
 
                         }
@@ -141,3 +140,28 @@ public class Main {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
