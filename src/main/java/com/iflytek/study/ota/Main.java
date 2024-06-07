@@ -111,18 +111,24 @@ public class Main {
                         break;
                     }
                     case "set": {//选择机型，版本
-                        System.out.println("输入机型编码：\n3.T20 Pro\n5.T10\n6.X1pro");
-                        int inputIndex = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline left-over
+                        System.out.println("1.设置机型\n2.设置版本号");
+                        int qqq = scanner.nextInt();
+                        if(qqq == 1) {
+                            System.out.println("输入机型编码：\n3.T20 Pro\n5.T10\n6.X1pro\n8.X2pro");
+                            int inputIndex = scanner.nextInt();
+                            scanner.nextLine(); // Consume newline left-over
 
-                        AiStudyDevice[] aiStudyDevices = AiStudyDevice.values();
+                            AiStudyDevice[] aiStudyDevices = AiStudyDevice.values();
 
-                        aiStudyDevice = aiStudyDevices[inputIndex];
+                            aiStudyDevice = aiStudyDevices[inputIndex];
+                        } else if (qqq==2) {
+                            System.out.println("请输入版本号(格式：iFLY_V2.00.5):");
+                            Scanner input=new Scanner(System.in);
 
-                        System.out.println("请输入版本号(格式：iFLY_V2.00.5):");
-                        String userInput = scanner.nextLine(); // 获取用户输入
+                            queryRecord = new QueryRecord(aiStudyDevice, input.nextLine());
+                            System.out.println(queryRecord);
 
-                        queryRecord = new QueryRecord(aiStudyDevice, userInput); // 使用用户输入创建QueryRecord
+                        }
 
                         break;
                     }
