@@ -51,61 +51,7 @@ public class Main {
         String command, outputString;
         byte[] bytesToDecrypt, decryptedBytes, decompressedBytes, compressedBytes, encryptedBytes;
         String[] temp;
-        if(!(args.length <= 0)) {
-            temp = args;
-            if(temp != null) {
-                switch (temp[0].toLowerCase()) {
-                    case "deskey": {
-                        StringBuilder sb = new StringBuilder("DES key is: ");
-                        sb.append(DESUtils.getKey());
-                        System.out.println(sb.toString());
-                        break;
-                    }
-                    case "desdecrypt": {
-                        if (!(temp.length <= 1)) {
-                            bytesToDecrypt = hexStringToByteArray(temp[1]);
-                            decryptedBytes = DESUtils.decrypt(bytesToDecrypt);
-                            decompressedBytes = GzipUtils.decompress(decryptedBytes);
-                            outputString = new String(decompressedBytes);
-                            System.out.println(outputString);
-                        } else {
-                            System.out.println("Missing arguments.");
-                        }
-                        break;
-                    }
-                    case "aeskey": {
-                        StringBuilder sb = new StringBuilder("AES key is: ");
-                        sb.append(AESUtils.getKey());
-                        System.out.println(sb.toString());
-                        break;
-                    }
-                    case "aesdecrypt": {
-                        if (!(temp.length <= 1)) {
-                            bytesToDecrypt = Base64Utils.decode(temp[1]);
-                            decryptedBytes = AESUtils.decrypt(bytesToDecrypt);
-                            decompressedBytes = GzipUtils.decompress(decryptedBytes);
-                            outputString = new String(decompressedBytes);
-                            System.out.println(outputString);
-                        } else {
-                            System.out.println("Missing arguments.");
-                        }
-                        break;
-                    }
-                    case "aesencrypt": {
-                        if (!(temp.length <= 1)) {
-                            compressedBytes = GzipUtils.compress(temp[1].getBytes(StandardCharsets.UTF_8));
-                            encryptedBytes = AESUtils.encrypt(compressedBytes);
-                            outputString = Base64Utils.encode(encryptedBytes);
-                            System.out.println(outputString);
-                        } else {
-                            System.out.println("Missing arguments.");
-                        }
-                        break;
-                    }
-                }
-            }
-            return;
-        }
+
         while(true) {
             System.out.print("> ");
             command = scanner.nextLine();
@@ -113,9 +59,7 @@ public class Main {
             if(temp != null) {
                 switch(temp[0].toLowerCase()) {
                     case "deskey": {
-                        StringBuilder sb = new StringBuilder("DES key is: ");
-                        sb.append(DESUtils.getKey());
-                        System.out.println(sb.toString());
+                        System.out.println("DES key is: "+DESUtils.getKey());
                         break;
                     }
                     case "desdecrypt": {
@@ -131,9 +75,7 @@ public class Main {
                         break;
                     }
                     case "aeskey": {
-                        StringBuilder sb = new StringBuilder("AES key is: ");
-                        sb.append(AESUtils.getKey());
-                        System.out.println(sb.toString());
+                        System.out.println("AES key is: "+AESUtils.getKey());
                         break;
                     }
                     case "aesdecrypt": {
